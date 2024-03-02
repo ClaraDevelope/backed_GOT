@@ -29,14 +29,25 @@ const register = async (req, res, next) => {
 }
 const putUser = async (req, res, next) => {
   try {
-    const userModify = new User(req.body)
-    userModify._id = id
+    const { id } = req.params
+    const userModify = req.body
     const userUpdated = await User.findByIdAndUpdate(id, userModify)
     return res.status(200).json(userUpdated)
   } catch (error) {
     return res.status(400).json(error)
   }
 }
+
+// const putUser = async (req, res, next) => {
+//   try {
+//     const userModify = new User(req.body)
+//     userModify._id = id
+//     const userUpdated = await User.findByIdAndUpdate(id, userModify)
+//     return res.status(200).json(userUpdated)
+//   } catch (error) {
+//     return res.status(400).json(error)
+//   }
+// }
 
 const deleteUser = async (req, res, next) => {
   try {
